@@ -11,7 +11,7 @@
     <label>開始番号: <input type="number" id="startNum" required></label>
     <label>終了番号: <input type="number" id="endNum" required></label>
     <label>出題数: <input type="number" id="quizCount" required></label>
-    <button type="submit">クイズ開始</button>
+    <button type="submit" id="startBtn" disabled>クイズ開始</button>
   </form>
 
   <div id="quizArea" style="display:none;">
@@ -21,7 +21,10 @@
     <button id="nextBtn" style="display:none;">次の問題</button>
   </div>
 
+  <!-- CSV読み込み用ライブラリ -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <!-- メインスクリプト -->
   <script src="script.js"></script>
 </body>
 </html>
