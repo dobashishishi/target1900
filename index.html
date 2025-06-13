@@ -2,7 +2,44 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- スマホ対応の基本 -->
   <title>英単語4択クイズ</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 1em;
+      padding: 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 1.5em;
+      text-align: center;
+    }
+    form label {
+      display: block;
+      margin: 0.5em 0;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 0.4em;
+      margin-top: 0.2em;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #quizArea button {
+      margin: 0.3em 0;
+    }
+    #questionText {
+      font-size: 1.2em;
+      margin: 1em 0;
+    }
+    #feedback {
+      margin-top: 1em;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h1>英単語4択クイズ</h1>
@@ -21,10 +58,7 @@
     <button id="nextBtn" style="display:none;">次の問題</button>
   </div>
 
-  <!-- CSV読み込み用ライブラリ -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
-  <!-- メインスクリプト -->
   <script src="script.js"></script>
 </body>
 </html>
