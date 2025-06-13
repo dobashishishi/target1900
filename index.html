@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>英単語4択クイズ</title>
+</head>
+<body>
+  <h1>英単語4択クイズ</h1>
+
+  <form id="settingsForm">
+    <label>開始番号: <input type="number" id="startNum" required></label>
+    <label>終了番号: <input type="number" id="endNum" required></label>
+    <label>出題数: <input type="number" id="quizCount" required></label>
+    <button type="submit">クイズ開始</button>
+  </form>
+
+  <div id="quizArea" style="display:none;">
+    <p id="questionText"></p>
+    <div id="choices"></div>
+    <p id="feedback"></p>
+    <button id="nextBtn" style="display:none;">次の問題</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
