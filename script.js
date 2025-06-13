@@ -22,11 +22,22 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 
 function startQuiz(start, end, count) {
   const rangeWords = words.slice(start - 1, end);
-  quizList = [];
-  for (let i = 0; i < count; i++) {
-    const q = rangeWords[Math.floor(Math.random() * rangeWords.length)];
-    quizList.push(q);
+  if (rangeWords.length < count) {
+    alert("指定範囲内に十分な単語がありません。");
+    return;
   }
+
+  quizList = [];
+  const usedIndexes = new Set();
+
+  while (quizList.length < count) {
+    const index = Math.floor(Math.random() * rangeWords.length);
+    if (!usedIndexes.has(index)) {
+      usedIndexes.add(index);
+      quizList.push(rangeWords[index]);
+    }
+  }
+
   currentQuestion = 0;
   document.getElementById("settingsForm").style.display = "none";
   document.getElementById("quizArea").style.display = "block";
@@ -44,21 +55,24 @@ function showQuestion(word) {
   nextBtn.style.display = "none";
   choicesDiv.innerHTML = "";
 
-  const choices = [word.Meaning];
+  const correct = word.Meaning;
+  const choices = [correct];
+
   while (choices.length < 4) {
     const rand = words[Math.floor(Math.random() * words.length)].Meaning;
     if (!choices.includes(rand)) choices.push(rand);
   }
+
   shuffle(choices);
 
   choices.forEach(choice => {
     const btn = document.createElement("button");
     btn.textContent = choice;
     btn.onclick = () => {
-      if (choice === word.Meaning) {
+      if (choice === correct) {
         feedback.textContent = "✅ 正解！";
       } else {
-        feedback.textContent = `❌ 不正解！正解は「${word.Meaning}」`;
+        feedback.textContent = `❌ 不正解！正解は「${correct}」`;
       }
       nextBtn.style.display = "inline";
     };
@@ -73,10 +87,14 @@ function shuffle(array) {
   }
 }
 
+// CSVを読み込む
 Papa.parse("words.csv", {
   download: true,
   header: true,
   complete: (results) => {
-    words = results.data;
+    // 不正な行（空や未定義）を除外
+    words = results.data.filter(w => w.Word && w.Meaning);
+    document.getElementById("startBtn").disabled = false;
+    console.log("読み込み完了：", words.length, "語");
   }
 });
